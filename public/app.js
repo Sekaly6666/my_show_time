@@ -9,6 +9,7 @@ const state = {
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
+const API_BASE_URL = (window.MY_SHOW_TIME_API_BASE_URL || '').replace(/\/$/, '');
 
 function toast(message) {
   const node = $('#toast');
@@ -68,7 +69,7 @@ async function api(path, options = {}) {
 
   if (state.token) headers.Authorization = `Bearer ${state.token}`;
 
-  const response = await fetch(`/api${path}`, { ...options, headers });
+  const response = await fetch(`${API_BASE_URL}/api${path}`, { ...options, headers });
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'Échec de la requête' }));
     throw new Error(Array.isArray(error.message) ? error.message.join(', ') : error.message);

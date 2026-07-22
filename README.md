@@ -53,3 +53,76 @@ Open the URL configured in `.env`. In this workspace I used `http://localhost:30
 - `PATCH /api/users/me/favorites`
 - `GET /api/notifications/me`
 - `GET /api/stats/bookings` admin only
+
+## Deployment with Vercel
+
+The project can run on Vercel as a static frontend plus NestJS API routes under `/api`.
+
+1. Create a MongoDB Atlas database. Localhost MongoDB will not work in production.
+2. In Vercel, set these environment variables:
+
+```bash
+MONGODB_URI=mongodb+srv://USER:PASSWORD@cluster.mongodb.net/my_show_time
+JWT_SECRET=replace_with_a_long_private_secret
+APP_URL=https://your-vercel-project.vercel.app
+```
+
+3. Use these Vercel project settings:
+
+```text
+Root Directory: my_show_time
+Build Command: npm run build
+Output Directory: public
+```
+
+4. Deploy and test the backend at:
+
+```text
+https://your-vercel-project.vercel.app/api/concerts
+```
+
+5. To seed the production database, temporarily put the Atlas `MONGODB_URI` in your local `.env`, then run:
+
+```bash
+npm run seed
+```
+
+If the frontend and backend are deployed on different domains, edit `public/config.js` and set:
+
+```js
+window.MY_SHOW_TIME_API_BASE_URL = 'https://your-backend-domain.com';
+```
+
+Leave it empty when frontend and backend are on the same Vercel domain.
+## Backend on Render
+
+This repository includes `render.yaml` for deploying the NestJS backend as a Render Web Service.
+
+Render settings if you create the service manually:
+
+```text
+Name: my-show-time-api
+Runtime: Node
+Build Command: npm install && npm run build
+Start Command: npm run start:prod
+Health Check Path: /api/health
+```
+
+Required Render environment variables:
+
+```bash
+MONGODB_URI=mongodb+srv://USER:PASSWORD@cluster.mongodb.net/my_show_time
+JWT_SECRET=replace_with_a_long_private_secret
+APP_URL=https://my-show-time-api.onrender.com
+NODE_ENV=production
+```
+
+After Render deploys, test:
+
+```text
+https://my-show-time-api.onrender.com/api/health
+https://my-show-time-api.onrender.com/api/concerts
+```
+
+The Vercel frontend is configured in `public/config.js` to call the Render backend at `https://my-show-time-api.onrender.com`.
+If Render gives the service another URL, update that file and redeploy the frontend.
