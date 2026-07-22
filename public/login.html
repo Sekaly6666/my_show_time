@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Connectez-vous à votre compte MyShowTime pour réserver vos événements." />
+    <title>MyShowTime — Connexion</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-page="login">
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4zM7 7h10v2H7V7zm10 10H7v-2h10v2z"></path>
+            </svg>
+          </div>
+          My<span>Show</span>Time
+        </a>
+        <button id="menuToggle" class="menu-toggle" aria-label="Menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-links">
+          <a href="/" data-auth-link>Concerts</a>
+          <a href="/bookings.html" data-auth-link>Mes Billets</a>
+          <a href="/favorites.html" data-auth-link>Favoris</a>
+          <a href="/admin.html" data-admin-link>Administration</a>
+          <a href="/login.html" class="active" data-guest-link>Connexion</a>
+          <a href="/register.html" class="primary-btn" data-guest-link>Inscription</a>
+        </div>
+      </div>
+    </nav>
+    <main class="auth-page">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h1>Connexion</h1>
+          <p class="muted">Accédez à votre compte pour gérer vos réservations</p>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+          <div class="form-group">
+            <label for="login-email">Adresse email</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input id="login-email" name="email" type="email" placeholder="votre@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Mot de passe</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input id="login-password" name="password" type="password" placeholder="Votre mot de passe" required />
+              <button type="button" class="password-toggle" aria-label="Afficher le mot de passe">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">Se connecter</button>
+          
+        </form>
+
+        <div class="auth-divider">
+          <span>ou</span>
+        </div>
+
+        <div class="auth-switch">
+          <p>Vous n'avez pas de compte ?</p>
+          <a href="/register.html" class="button ghost btn-full">Créer un compte gratuitement</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo">
+            <div class="logo-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4zM7 7h10v2H7V7zm10 10H7v-2h10v2z"></path>
+              </svg>
+            </div>
+            My<span>Show</span>Time
+          </a>
+          <p>La billetterie n°1 en Afrique de l'Ouest. Vivez vos passions en un clic.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <a href="/" data-auth-link>Concerts</a>
+          <a href="/bookings.html">Mes Billets</a>
+          <a href="/favorites.html">Favoris</a>
+        </div>
+        <div class="footer-links">
+          <h4>Aide</h4>
+          <a href="#">Support</a>
+          <a href="#">CGV</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MyShowTime. Réalisé par <strong>Sekou Amara Bamba</strong>.</p>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

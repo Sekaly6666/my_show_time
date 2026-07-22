@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Panneau d'administration MyShowTime — Gérez les concerts, utilisateurs et statistiques." />
+    <title>MyShowTime — Administration</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-page="admin">
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4zM7 7h10v2H7V7zm10 10H7v-2h10v2z"></path>
+            </svg>
+          </div>
+          My<span>Show</span>Time
+        </a>
+        <button id="menuToggle" class="menu-toggle" aria-label="Menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-links">
+          <a href="/" data-auth-link>Concerts</a>
+          <a href="/bookings.html" data-auth-link>Mes Billets</a>
+          <a href="/favorites.html" data-auth-link>Favoris <span id="favCounter" class="badge">0</span></a>
+          <a href="/admin.html" id="adminLink" class="admin-link-main active" data-admin-link>Administration</a>
+          <a href="/login.html" class="login-link" data-guest-link>Connexion</a>
+          <a href="/register.html" class="register-link primary-btn" data-guest-link>Inscription</a>
+          <div class="nav-user-profile" data-auth-link>
+            <a href="/profile.html" class="user-info">
+              <div class="user-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <span id="userNameDisplay">Profil</span>
+            </a>
+            <button id="logoutBtn" class="logout-icon-btn" title="Déconnexion">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container admin-layout">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar-header">
+          <p class="eyebrow">Backoffice</p>
+          <h1>Administration</h1>
+        </div>
+        <div class="sidebar-nav">
+          <a href="#stats-section" class="active">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Tableau de bord
+          </a>
+          <a href="#bookings-section">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4z"/></svg>
+            Réservations
+          </a>
+
+          <a href="#concerts-section">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            Concerts
+          </a>
+          <a href="#users-section">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Utilisateurs
+          </a>
+          <a href="#evaluations-section">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Note Moyenne & Avis
+          </a>
+          <a href="#sales-section">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            Billets Vendus
+          </a>
+          <a href="#notifications-section">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Notifications Système
+          </a>
+        </div>
+      </aside>
+
+      <div class="admin-main">
+        <section id="stats-section" class="admin-section active">
+          <div class="section-title">
+            <h2>Statistiques</h2>
+            <p class="muted">Aperçu global de l'activité</p>
+          </div>
+          <div id="stats" class="stats-grid"></div>
+          
+          <div class="section-title mt-40">
+            <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" class="mr-8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Disponibilité Événements</h3>
+          </div>
+          <div id="availabilityStats" class="stats-grid"></div>
+        </section>
+
+        <section id="bookings-section" class="admin-section">
+          <div class="section-title">
+            <h2>Réservations</h2>
+            <p class="muted">Valider les tickets et suivre les ventes</p>
+          </div>
+          <div id="bookingsTable" class="admin-table-card"></div>
+        </section>
+
+
+
+        <section id="concerts-section" class="admin-section">
+          <div class="section-title">
+            <h2>Gestion des Concerts</h2>
+            <button id="addConcertBtn" class="primary-btn">+ Nouveau Concert</button>
+          </div>
+          <div id="adminConcerts" class="admin-table-card"></div>
+        </section>
+
+        <section id="users-section" class="admin-section">
+          <div class="section-title">
+            <h2>Utilisateurs</h2>
+            <button class="ghost" onclick="openModal($('#userFormTpl').innerHTML)">+ Nouvel Utilisateur</button>
+          </div>
+          <div id="usersTable" class="admin-table-card"></div>
+        </section>
+
+        <section id="evaluations-section" class="admin-section">
+          <div class="section-title">
+            <h2>Note Moyenne & Avis</h2>
+            <p class="muted">Liste des utilisateurs ayant évalué les concerts</p>
+          </div>
+          <div id="evaluationsList" class="admin-table-card"></div>
+        </section>
+
+        <section id="sales-section" class="admin-section">
+          <div class="section-title">
+            <h2>Billets Vendus</h2>
+            <p class="muted">Historique détaillé des tickets achetés</p>
+          </div>
+          <div id="salesList" class="admin-table-card"></div>
+        </section>
+
+        <section id="notifications-section" class="admin-section">
+          <div class="section-title">
+            <div>
+              <h2>Notifications Système</h2>
+              <p class="muted">Historique de toutes les actions utilisateurs</p>
+            </div>
+            <div class="notif-filters">
+              <button class="filter-btn active" data-filter="all">Toutes</button>
+              <button class="filter-btn" data-filter="booking">Réservations</button>
+              <button class="filter-btn" data-filter="review">Avis</button>
+              <button class="filter-btn" data-filter="favorite">Favoris</button>
+            </div>
+          </div>
+          <div id="adminNotificationsList" class="admin-table-card"></div>
+          <div class="text-center mt-30 mb-20">
+            <button id="loadMoreAdminNotifs" class="ghost hidden">Voir plus de notifications</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Templates pour Modales -->
+    <template id="concertFormTpl">
+      <form id="concertForm" class="modal-form modal-large">
+        <div class="modal-header">
+          <p class="eyebrow">Administration MyShowTime</p>
+          <h2>Studio de Création d'Événements</h2>
+          <p class="muted">Concevez et publiez votre prochain grand spectacle en quelques clics.</p>
+        </div>
+        
+        <div class="form-sections">
+          <div class="form-section">
+            <div class="section-icon-header">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <p class="eyebrow">Détails de l'Artiste</p>
+            </div>
+            <div class="form-grid">
+              <input name="title" placeholder="Nom de la Tournée / Titre" required />
+              <input name="groupName" placeholder="Artiste ou Groupe" required />
+              <input name="genre" placeholder="Genre (ex: Rock, Jazz, Afro...)" required />
+              <input name="date" type="datetime-local" required />
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-icon-header">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <p class="eyebrow">Lieu & Billetterie</p>
+            </div>
+            <div class="form-grid">
+              <input name="venue" placeholder="Nom de la salle" required />
+              <input name="city" placeholder="Ville" required />
+              <input name="price" type="number" min="0" placeholder="Prix du billet (FCFA)" required />
+              <input name="capacity" type="number" min="1" placeholder="Nombre de places" required />
+            </div>
+          </div>
+
+          <div class="form-section full-width highlight-section">
+            <div class="section-icon-header">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <p class="eyebrow">Visuels & Description</p>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Affiche (Image)</label>
+                <input name="image" type="file" accept="image/*" />
+              </div>
+              <div class="form-group">
+                <label>Teaser (Vidéo)</label>
+                <input name="video" type="file" accept="video/*" />
+              </div>
+            </div>
+            <textarea name="description" placeholder="Écrivez une description captivante pour attirer votre public..." rows="6" class="full-width mt-10"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="ghost" onclick="closeModal()">Annuler</button>
+          <button type="submit" class="primary">Lancer l'Événement</button>
+        </div>
+      </form>
+    </template>
+
+    <template id="userFormTpl">
+      <form id="userForm" class="modal-form">
+        <h2>Ajouter un utilisateur</h2>
+        <input name="name" placeholder="Nom complet" required />
+        <input name="email" type="email" placeholder="Adresse email" required />
+        <input name="password" type="password" placeholder="Mot de passe" minlength="6" required />
+        <select name="role">
+          <option value="user">Utilisateur standard</option>
+          <option value="admin">Administrateur</option>
+        </select>
+        <div class="modal-actions">
+          <button type="button" class="ghost" onclick="closeModal()">Annuler</button>
+          <button type="submit">Créer l'utilisateur</button>
+        </div>
+      </form>
+    </template>
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a href="/">Événements</a>
+        <a href="/login.html">Connexion</a>
+        <a href="/register.html">Inscription</a>
+        <a href="/bookings.html">Mes Billets</a>
+        <a href="/profile.html">Profil</a>
+      </div>
+      <p>&copy; 2026 MyShowTime — Tous droits réservés.</p>
+    </footer>
+
+    <div id="modal" class="modal"></div>
+    <div id="toast" class="toast"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

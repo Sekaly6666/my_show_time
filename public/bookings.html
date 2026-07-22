@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Consultez vos réservations et billets QR code sur MyShowTime." />
+    <title>MyShowTime — Mes Billets</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-page="bookings">
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4zM7 7h10v2H7V7zm10 10H7v-2h10v2z"></path>
+            </svg>
+          </div>
+          My<span>Show</span>Time
+        </a>
+        <button id="menuToggle" class="menu-toggle" aria-label="Menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-links">
+          <a href="/" data-auth-link>Concerts</a>
+          <a href="/bookings.html" class="active" data-auth-link>Mes Billets</a>
+          <a href="/favorites.html" data-auth-link>Favoris <span id="favCounter" class="badge">0</span></a>
+          <a href="/admin.html" id="adminLink" class="admin-link-main" data-admin-link>Administration</a>
+          <a href="/login.html" class="login-link" data-guest-link>Connexion</a>
+          <a href="/register.html" class="register-link primary-btn" data-guest-link>Inscription</a>
+          <div class="nav-user-profile" data-auth-link>
+            <a href="/profile.html" class="user-info">
+              <div class="user-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <span id="userNameDisplay">Profil</span>
+            </a>
+            <button id="logoutBtn" class="logout-icon-btn" title="Déconnexion">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <header class="page-header">
+        <div class="header-content">
+          <div>
+            <p class="eyebrow">Mes Achats</p>
+            <h1>Mes Billets de Concert</h1>
+            <p class="muted">Gérez vos réservations et accédez à vos codes QR pour l'entrée.</p>
+          </div>
+          <div class="title-with-icon">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4zM7 7h10v2H7V7zm10 10H7v-2h10v2z"></path></svg>
+          </div>
+        </div>
+      </header>
+
+      <section id="bookingList" class="booking-list">
+        <!-- Les billets seront chargés ici -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo">My<span>Show</span>Time</a>
+          <p>La billetterie n°1 en Afrique de l'Ouest. Vivez vos passions en un clic.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <a href="/" data-auth-link>Concerts</a>
+          <a href="/bookings.html">Mes Billets</a>
+          <a href="/favorites.html">Favoris</a>
+        </div>
+        <div class="footer-links">
+          <h4>Aide</h4>
+          <a href="#">Support</a>
+          <a href="#">CGV</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MyShowTime. Réalisé par <strong>Sekou Amara Bamba</strong>.</p>
+      </div>
+    </footer>
+
+    <div id="modal" class="modal"></div>
+    <div id="toast" class="toast"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
